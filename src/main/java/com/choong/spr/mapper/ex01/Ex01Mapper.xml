@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.choong.spr.mapper.ex01.Ex01Mapper">
+	
+	<select id="selectProducts" resultType="com.choong.spr.domain.ex01.Products">
+		SELECT 	c.CategoryName, p.ProductName, p.Unit, p.Price
+		FROM	Products p 
+				JOIN Categories c 
+				ON p.CategoryID = c.CategoryID
+		<if test="list != null and list.size() > 0">		
+			WHERE c.CategoryID IN (
+			
+				<foreach collection="list" item="item" separator=", ">
+					#{item}
+				</foreach>
+				
+			)
+		</if>
+	</select>
+	
+	<select id="selectCategory" resultType="com.choong.spr.domain.ex01.Category">
+		SELECT 	CategoryID,
+				CategoryName,
+				Description
+		FROM 	Categories
+		ORDER BY 1
+	</select>
+	
+	<select id="selectProductsThan" resultType="com.choong.spr.domain.ex01.Products">
+	
+	<![CDATA[
+		SELECT 	c.CategoryName, p.ProductName, p.Unit, p.Price
+		FROM	Products p 
+				JOIN Categories c 
+				ON p.CategoryID = c.CategoryID
+		WHERE 	p.Price < #{price }
+	]]>
+			
+	</select>
+</mapper>

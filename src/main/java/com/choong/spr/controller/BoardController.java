@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choong.spr.domain.BoardDto;
@@ -26,8 +27,10 @@ public class BoardController {
 	private ReplyService replyService;
 
 	@RequestMapping("list")
-	public void list(Model model) {
-		List<BoardDto> list = service.listBoard();
+	public void list(@RequestParam(name= "keyword", defaultValue = "") String keyword,
+					@RequestParam(name = "type", defaultValue = "") String type,
+			Model model) {
+		List<BoardDto> list = service.listBoard(type, keyword);
 		model.addAttribute("boardList", list);
 	}
 	
