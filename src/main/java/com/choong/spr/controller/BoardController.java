@@ -57,7 +57,9 @@ public class BoardController {
 		BoardDto dto = service.getBoardById(id);
 		List<ReplyDto> replyList = replyService.getReplyByBoardId(id);
 		model.addAttribute("board", dto);
-		model.addAttribute("replyList", replyList);
+		
+		// ajax로 처리하기 위해 삭제
+		// model.addAttribute("replyList", replyList);
 		
 	}
 	

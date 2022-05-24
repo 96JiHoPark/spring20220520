@@ -30,9 +30,9 @@ public class ReplyService {
 		return mapper.updateReply(dto) == 1;
 	}
 
-	public boolean deleteReply(ReplyDto dto) {
+	public boolean deleteReply(int id) {
 		// TODO Auto-generated method stub
-		return mapper.deleteReply(dto.getId()) == 1;
+		return mapper.deleteReply(id) == 1;
 	}
 
 }
