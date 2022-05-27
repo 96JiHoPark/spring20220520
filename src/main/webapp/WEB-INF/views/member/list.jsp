@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,69 +14,45 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<my:navBar current="list" />
 
+	<my:navBar current="memberList"></my:navBar>
+	
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>글 목록</h1>
-				<c:if test="${not empty message }">
-					<div class="alert alert-primary">
-						${message }
-					</div>
-				</c:if>
 				
-				<!-- table.table>thead>tr>th*3^^tbody -->
 				<table class="table">
 					<thead>
 						<tr>
-							<th><i class="fa-solid fa-hashtag"></i></th>
-							<th>제목</th>
-							<th>작성자(닉네임)</th>
-							<th><i class="fa-solid fa-calendar"></i></th>
+							<th>id</th>
+							<th>password</th>
+							<th>email</th>
+							<th>nickName</th>
+							<th>inserted</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${boardList }" var="board">
+						<c:forEach items="${memberList }" var="member">
 							<tr>
-								<td>${board.id }</td>
 								<td>
-													
-									<c:url value="/board/get" var="getUrl">
-										<c:param name="id" value="${board.id }"></c:param>
+									<c:url value="/member/get" var="getMemberUrl">
+										<c:param name="id" value="${member.id }"></c:param>
 									</c:url>
-									
-									<a href="${getUrl }">
-										<c:out value="${board.title }" />
+									<a href="${getMemberUrl }">
+										${member.id }
 									</a>
-									
-									<c:if test="${board.numOfReply > 0 }">
-										<span class="badge rounded-pill bg-light text-dark">
-											<i class="fa-solid fa-comment-dots"></i>
-											${board.numOfReply }
-										</span>
-									</c:if>
-									
 								</td>
-								<td>${board.writerNickName }</td>
-								<td>${board.prettyInserted }</td>
+								<td>${member.password }</td>
+								<td>${member.email }</td>
+								<td>${member.nickName }</td>
+								<td>${member.inserted }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
