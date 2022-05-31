@@ -7,14 +7,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.choong.spr.domain.BoardDto;
 import com.choong.spr.domain.MemberDto;
+import com.choong.spr.mapper.BoardMapper;
 import com.choong.spr.mapper.MemberMapper;
+import com.choong.spr.mapper.ReplyMapper;
 
 @Service
 public class MemberService {
 	
 	@Autowired
 	MemberMapper mapper;
+	
+	@Autowired
+	ReplyMapper replyMapper;
+	
+	@Autowired 
+	BoardMapper boardMapper;
+	
+	@Autowired
+	BoardService boardService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -63,7 +75,24 @@ public class MemberService {
 		int cnt2 = 0;
 		
 		if(passwordEncoder.matches(rawPW, ecodedPW)) {
-			cnt1 = mapper.deleteAuth(dto.getId()); // foreign key 제약사항 때문에 먼저 지워져야 함
+			
+			//댓글 삭제
+			replyMapper.deleteByMemberId(dto.getId());
+			
+			//이 멤버가 쓴 게시글에 달린 다른사람 댓글 삭제
+			List<BoardDto> boardList = boardMapper.listByMemberId(dto.getId());
+			for(BoardDto board : boardList) {
+//				replyMapper.deleteByBoardId(board.getId());
+				boardService.deleteBoard(board.getId());
+			}
+			
+			//이 멤버가 쓴 게시글 삭제
+			boardMapper.deleteByMemberId(dto.getId());
+			
+			// 권한테이블 삭제
+			mapper.deleteAuth(dto.getId()); // foreign key 제약사항 때문에 먼저 지워져야 함
+			
+			// 멤버테이블 삭제
 			cnt2 = mapper.deleteMemberById(dto.getId());
 		}
 		
@@ -85,6 +114,11 @@ public class MemberService {
 		}
 		
 		return false;
+	}
+
+	public void initPassword(String id) {
+		String pw = passwordEncoder.encode(id);
+		mapper.updatePasswordById(id, pw);
 	}
 	
 }

@@ -26,7 +26,7 @@
 	$(document).ready(function(){
 		
 		// 패스워드 일치 여부
-		let pwOk = true;
+		let pwOk = false;
 		// 이메일 중복 여부 // 중복이 아닐 때에 OK
 		let emailOk = true;
 		// 닉네임 중복 여부 // 중복이 아닐 때에 OK
@@ -178,9 +178,9 @@
 	
 	<div>
 		아이디: <input type="text" value="${member.id }" readonly /> <br /> 
-		암호:<input id="passwordInput1" type="text" value="${member.password }" />
+		암호:<input id="passwordInput1" type="text" value="" />
 		<br /> 
-		암호확인: <input id="passwordInput2" type="text" value="${member.password }" /> <br />
+		암호확인: <input id="passwordInput2" type="text" value="" /> <br />
 		<p id="passwordCheckText"></p>
 		이메일: <input id="emailInput1" type="text" value="${member.email }" />
 		<button id="emailCheckButton1" type="button" disabled>이메일중복확인</button>
@@ -200,7 +200,7 @@
 	 --%>
 
 	<div>
-		<button id="modifyButton1" data-bs-toggle="modal" data-bs-target="#modal2" disabled>수정</button>
+		<button id="modifyButton1" data-bs-toggle="modal" data-bs-target="#modal2" disabled >수정</button>
 		<button data-bs-toggle="modal" data-bs-target="#modal1">삭제</button>
 	</div>
 

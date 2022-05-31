@@ -5,18 +5,20 @@
 <mapper namespace="com.choong.spr.mapper.ReplyMapper">
 
 	<insert id="insertReply">
-	INSERT INTO Reply (board_id, content)
-	VALUES (#{boardId}, #{content})
+	INSERT INTO Reply (board_id, content, memberId)
+	VALUES (#{boardId}, #{content}, #{memberId})
 	</insert>
 	
 	<select id="selectAllBoardId" resultType="com.choong.spr.domain.ReplyDto">
-	SELECT id, 
-	       board_id boardId,
-	       content,
-	       inserted
-	FROM Reply
-	WHERE board_id = #{boardId}
-	ORDER BY id
+	SELECT r.id, 
+	       r.board_id boardId,
+	       r.content,
+	       m.nickName writerNickName,
+	       r.inserted,
+	       IF (m.id = #{memberId}, 1, 0) own
+	FROM Reply r JOIN Member m ON r.memberId = m.id
+	WHERE r.board_id = #{boardId}
+	ORDER BY r.id
 	</select>
 	
 	<update id="updateReply">
@@ -36,4 +38,18 @@
 	WHERE board_id = #{boardId}
 	</delete>
 	
+	<select id="selectReplyById" resultType="com.choong.spr.domain.ReplyDto">
+	SELECT 	id,
+			board_id boardId,
+			content,
+			memberId,
+			inserted
+	FROM Reply
+	WHERE id = #{id}
+	</select>
+	
+	<select id="deleteByMemberId">
+	DELETE FROM Reply
+	WHERE memberId = #{memberId}
+	</select>
 </mapper>

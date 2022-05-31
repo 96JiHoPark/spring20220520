@@ -23,12 +23,13 @@
 		<security:intercept-url pattern="/board/remove" access="isAuthenticated()"/>
 		
 		<!-- 댓글 create, update, delete -->
-		<security:intercept-url pattern="/reply/insert" access="isAuthenticated()"/>
-		<security:intercept-url pattern="/reply/modify" access="isAuthenticated()"/>
-		<security:intercept-url pattern="/reply/delete" access="isAuthenticated()"/>
+		<!-- <security:intercept-url pattern="/reply/insert" access="isAuthenticated()"/> -->
+		<!-- <security:intercept-url pattern="/reply/modify" access="isAuthenticated()"/> -->
+		<!-- <security:intercept-url pattern="/reply/delete" access="isAuthenticated()"/> -->
 		
 		<!-- 회원 read, update, delete -->
 		<security:intercept-url pattern="/member/list" access="hasRole('ADMIN')"/>
+		<security:intercept-url pattern="/member/initpw" access="hasRole('ADMIN')"/>
 		<security:intercept-url pattern="/member/get" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/member/remove" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/member/modify" access="isAuthenticated()"/>

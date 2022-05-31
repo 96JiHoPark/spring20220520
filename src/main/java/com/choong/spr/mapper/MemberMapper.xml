@@ -60,4 +60,10 @@
 		DELETE FROM Auth
 		WHERE memberId = #{id}
 	</delete>
+	
+	<update id="updatePasswordById">
+		UPDATE Member
+		SET password = #{pw}
+		WHERE id = #{id}
+	</update>
 </mapper>
