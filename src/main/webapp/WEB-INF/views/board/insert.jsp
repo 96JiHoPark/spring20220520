@@ -33,7 +33,7 @@
 					
 					파일
 					
-					<input type="file" name="file" accept="image/*" />
+					<input multiple="multiple" type="file" name="file" accept="image/*" />
 					
 					<button class="btn btn-primary">작성</button>
 				</form>

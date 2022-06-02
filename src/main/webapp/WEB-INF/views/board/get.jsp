@@ -284,10 +284,12 @@
 							cols="30" rows="10" readonly>${board.body }</textarea>
 					</div>
 					
-					<!-- 이미지 (로컬경로)  -->
-					<div>
-						<img src="file:///C:/imgtmp/board/${board.id }/${board.fileName }" alt="" />
-					</div>
+					<!-- 이미지 (아마존 s3 bucket)  -->
+					<c:forEach items="${board.fileName }" var="file">
+						<div>
+							<img src="${imageUrl}/board/${board.id }/${file }" alt="" />
+						</div>
+					</c:forEach>
 					
 					<div>
 						<label for="input2" class="form-label">작성일시</label>
