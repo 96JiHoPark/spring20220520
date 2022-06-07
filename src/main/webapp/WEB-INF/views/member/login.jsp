@@ -16,13 +16,30 @@
 <body>
 	<my:navBar current="login"></my:navBar>
 	
-	<h1>로그인</h1>
-	
-	<form action="${appRoot }/login" method="post">
-		아이디 : <input type="text" name="username" /> <br />
-		패스워드 : <input type="password" name="password"/> <br />
-		<input type="checkbox" name="remember-me" id="" /> 로그인 유지
-		<input type="submit" value="로그인" />
-	</form>
+	<div class="row justify-content-center">
+		<div class="col-12 col-lg-6">
+		
+			<h1>로그인</h1>
+			<form action="${appRoot }/login" method="post">
+				<label for="usernameInput1" class="form-label">
+					아이디 
+				</label>
+				<input class="form-control" id="usernameInput1" type="text" name="username" /> <br />
+				<label for="passwordInput1" class="form-label">
+					패스워드 
+				</label>
+				<input class="form-control" id="passwordInput1" type="password" name="password"/> <br />
+				
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" name="remember-me" id="rememberMeCheck" /> 
+					<label for="rememberMeCheck" class="form-check-label">
+						자동 로그인
+					</label>
+					<input type="submit" class="btn btn-primary" value="로그인" />
+				</div>
+			</form>
+			
+		</div>
+	</div>
 </body>
 </html>

@@ -50,6 +50,12 @@
 										<c:out value="${board.title }" />
 									</a>
 									
+									<c:if test="${board.hasFile }">
+										<span class="badge rounded-pill bg-light text-dark">
+											<i class="fa-solid fa-file"></i>
+										</span>
+									</c:if>
+									
 									<c:if test="${board.numOfReply > 0 }">
 										<span class="badge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-comment-dots"></i>

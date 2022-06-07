@@ -16,6 +16,7 @@ public class BoardDto {
 	private String writerNickName;
 	private int numOfReply;
 	private List<String> fileName;
+	private boolean hasFile;
 
 	public String getPrettyInserted() {
 		// 24시간 이내면 시간만

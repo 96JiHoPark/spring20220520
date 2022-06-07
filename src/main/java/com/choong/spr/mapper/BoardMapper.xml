@@ -9,10 +9,12 @@
 		SELECT  b.id, 
 				b.title, 
 				b.inserted, 
-				COUNT(r.id) numOfReply,
-				m.nickName writerNickName
+				COUNT(DISTINCT r.id) numOfReply,
+				m.nickName writerNickName,
+				COUNT(f.id) hasFile
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
-						JOIN Member m ON b.memberId = m.id
+							JOIN Member m ON b.memberId = m.id
+						LEFT JOIN File f ON b.id = f.boardId
 		
 		<if test="keyword != '%%'">
 			<choose>
@@ -96,4 +98,10 @@
 	FROM File
 	WHERE boardId = #{boardId}
 	</select>
+	
+	<delete id="deleteFileByBoardIdAndFileName">
+	DELETE FROM File
+	WHERE boardId = #{boardId}
+		AND fileName = #{fileName}
+	</delete>
 </mapper>

@@ -170,39 +170,77 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<my:navBar></my:navBar>
 	
-	<div>
-		<p>${message }</p>
-	</div>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-6">
+			
+				<h1>회원 정보 보기</h1>
+				
+				<div>
+					<p>${message }</p>
+				</div>
+				
+				<div>
+					<label for="idInput1" class="form-label">
+						아이디
+					</label>
+					<input id="idInput1" class="form-control" type="text" value="${member.id }" readonly />
+
+					<label for="passwordInput1" class="form-label">
+						암호					
+					</label>
+					<input id="passwordInput1" class="form-control" type="text" value="" />
+					
+					<label for="passwordInput2" class="form-label">
+						암호확인
+					</label>
+					<input id="passwordInput2" class="form-control" type="text" value="" />
+					<p id="passwordCheckText" class="form-text"></p>
+					
+					<label for="emailInput1" class="form-label">
+						이메일
+					</label>
+					<div class="input-group">
+						<input class="form-control" id="emailInput1" type="text" value="${member.email }" />
+						<button class="btn btn-secondary" id="emailCheckButton1" type="button" disabled>이메일중복확인</button>
+					</div>
+					<p id="emailCheckText" class="form-text"></p>
+					
+					<label for="nickNameInput1" class="form-label">
+						닉네임
+					</label>
+					<div class="input-group">					
+						<input id="nickNameInput1" class="form-control" type="text"
+							value="${member.nickName }" />
+						<button id="nickNameCheckButton1" class="btn btn-secondary" type="button" disabled>닉네임중복확인</button>
+					</div>
+					<p id="nickNameCheckText" class="form-text"></p>
+					
+					<label for="" class="form-label">
+						가입일시	
+					</label>
+					<input class="form-control" type="datetime-local" value="${member.inserted }" readonly />
+					
+				</div>
+				
+				<%--
+				1. 이메일 input 변경 발생시 '이메일중복확인버튼 활성화' -> 버튼 클릭시 ajax로 요청/응답, 적절한 메시지 출력
+				2. 닉네임 input 변경 발생시 '닉네임중복확인버튼 활성화' -> 버튼 클릭시 ajax로 요청/응답, 적절한 메시지 출력
+				3. 암호/암호확인일치, 이메일 중복확인 완료, 닉네임 중복확인 완료시에만 수정버튼 활성화
+				 --%>
+			
+				<div>
+					<button class="btn btn-secondary" id="modifyButton1" data-bs-toggle="modal" data-bs-target="#modal2" disabled >수정</button>
+					<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal1">삭제</button>
+				</div>
+				
+			</div>
+		</div>
+	</div>	
 	
-	<div>
-		아이디: <input type="text" value="${member.id }" readonly /> <br /> 
-		암호:<input id="passwordInput1" type="text" value="" />
-		<br /> 
-		암호확인: <input id="passwordInput2" type="text" value="" /> <br />
-		<p id="passwordCheckText"></p>
-		이메일: <input id="emailInput1" type="text" value="${member.email }" />
-		<button id="emailCheckButton1" type="button" disabled>이메일중복확인</button>
-		<p id="emailCheckText"></p>
-		<br /> 닉네임: <input id="nickNameInput1" type="text"
-			value="${member.nickName }" />
-		<button id="nickNameCheckButton1" type="button" disabled>닉네임중복확인</button>
-		<p id="nickNameCheckText"></p>
-		<br /> 가입일시: <input type="text" value="${member.inserted }" readonly />
-		<br />
-	</div>
-
-	<%--
-	1. 이메일 input 변경 발생시 '이메일중복확인버튼 활성화' -> 버튼 클릭시 ajax로 요청/응답, 적절한 메시지 출력
-	2. 닉네임 input 변경 발생시 '닉네임중복확인버튼 활성화' -> 버튼 클릭시 ajax로 요청/응답, 적절한 메시지 출력
-	3. 암호/암호확인일치, 이메일 중복확인 완료, 닉네임 중복확인 완료시에만 수정버튼 활성화
-	 --%>
-
-	<div>
-		<button id="modifyButton1" data-bs-toggle="modal" data-bs-target="#modal2" disabled >수정</button>
-		<button data-bs-toggle="modal" data-bs-target="#modal1">삭제</button>
-	</div>
 
 	<!-- Modal 탈퇴 -->
 	<div class="modal fade" id="modal1" tabindex="-1"
